@@ -27,6 +27,14 @@
       return { onSnapshot: function (cb, err) { subs.push({ col: col, cb: cb }); V.all().then(function (d) { cb(colSnap(d, col)); }).catch(err); } };
     }
   };
+  /* Quando a nuvem traz mudancas do outro aparelho, a tela se atualiza sozinha. */
+  window.addEventListener('vida-nuvem', async function (e) {
+    var paths = (e.detail && e.detail.paths) || [], docs = await V.all();
+    subs.forEach(function (s) {
+      if (s.col && paths.some(function (p) { return V.split(p).col === s.col; })) s.cb(colSnap(docs, s.col));
+      else if (s.doc && paths.indexOf(s.doc) >= 0) s.cb(snap(V.split(s.doc).id, docs[s.doc]));
+    });
+  });
   window.claude = { use: async function (n) { return n === 'db' ? db : n === 'user' ? { id: async function () { return 'me'; } } : null; } };
 
   /* ---- leitor de zip (o backup) ---- */

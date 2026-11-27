@@ -1,7 +1,7 @@
 /* Faz o app abrir sem internet e checa as contas com o app fechado. */
 importScripts('dados.js');
-var CACHE = 'vida-rpg-3';
-var ARQ = ['./', 'index.html', 'dados.js', 'app.js', 'manifest.webmanifest', 'icone-192.png', 'icone-512.png'];
+var CACHE = 'vida-rpg-4';
+var ARQ = ['./', 'index.html', 'dados.js', 'nuvem.js', 'app.js', 'manifest.webmanifest', 'icone-192.png', 'icone-512.png'];
 var FORA = ['fonts.googleapis.com', 'fonts.gstatic.com', 'cdnjs.cloudflare.com'];
 
 self.addEventListener('install', function (e) {
